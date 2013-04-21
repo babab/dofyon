@@ -23,7 +23,7 @@ DY_PADDING_RIGHT=8
 dy_color_red='\033[0;31m'    # red
 dy_color_green='\033[0;32m'  # green
 
-# Functions ############################################################
+# Functions ##################################################################
 dy-title ()
 {
     # Echo out a string which appends `DY_LINECHAR` up to a fixed number,
@@ -88,3 +88,21 @@ dy-status ()
             echo "$1"
     esac
 }
+
+# Main script ################################################################
+case $1 in
+    "t" | "title")
+        shift
+        dy-title "$*"
+        ;;
+    "s" | "status")
+        shift
+        dy-status "$*"
+        ;;
+    "e" | "echo")
+        shift
+        dy-echo "$*"
+        ;;
+    *)
+        echo No argument specified for $(basename "$0")
+esac

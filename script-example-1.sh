@@ -1,38 +1,32 @@
 #!/bin/bash
-source dofyon.sh
 
-dy-title Testing 123
+which dofyon.sh >/dev/null 2>&1
+test $? -eq 0 || (echo dofyon.sh is not in PATH && exit)
+
+dofyon.sh t Testing 123
 sleep 1
-dy-status DONE
+dofyon.sh s DONE
 
-dy-title Checking hostname: $(hostname)
-dy-status d
+dofyon.sh t Checking hostname: $(hostname)
+dofyon.sh s d
 
-dy-title Testing existence of "'doesnotexist' exec"
+dofyon.sh t Testing existence of "'doesnotexist' exec"
 which doesnotexist >/dev/null 2>&1
-dy-status dof?
+dofyon.sh s dof?
 
-dy-title Testing a custom state
-dy-status CUSTOM
+dofyon.sh t Testing a custom state
+dofyon.sh s CUSTOM
 
-dy-title Testing a custom state with a custom color
-dy-echo '\033[0;35m' YELLOW
+dofyon.sh t Testing a custom state with a custom color
+dofyon.sh e '\033[0;35m''YELLOW'
 
-DY_LINECHAR=":"
-dy-title "Changing linechar to '='"
+dofyon.sh t Is there a yes/no option
+dofyon.sh s y
+
+dofyon.sh t Can you also show the no option
 sleep 2
-dy-status FAILED
+dofyon.sh s n
 
-DY_LINECHAR="."
-dy-title "Changing linechar to '.'"
-dy-status DONE
-
-dy-title Is there a yes/no option
-dy-status y
-
-dy-title Can you also show the no option
-dy-status n
-
-dy-title "Ok so I ask again, does 'doesnotexist' exist?"
+dofyon.sh t "Ok so I ask again, does 'doesnotexist' exist?"
 which doesnotexist >/dev/null 2>&1
-dy-status yon?
+dofyon.sh s yon?
